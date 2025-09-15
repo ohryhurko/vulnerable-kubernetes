@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: poor-registry
-        image: madhuakula/k8s-goat-poor-registry
+        image: poor-registry:latest
+        imagePullPolicy: Never
         resources:
           limits:
             memory: "50Mi"

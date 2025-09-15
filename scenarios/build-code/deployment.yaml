@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: build-code
-        image: madhuakula/k8s-goat-build-code
+        image: build-code:latest
+        imagePullPolicy: Never
         resources:
           limits:
             memory: "50Mi"

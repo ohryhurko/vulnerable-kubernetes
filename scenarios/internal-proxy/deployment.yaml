@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: internal-api
-        image: madhuakula/k8s-goat-internal-api
+        image: internal-api:latest
+        imagePullPolicy: Never
         resources:
           limits:
             cpu: 50m
@@ -27,7 +28,8 @@ spec:
         ports:
         - containerPort: 3000
       - name: info-app
-        image: madhuakula/k8s-goat-info-app
+        image: info-app:latest
+        imagePullPolicy: Never
         resources:
           limits:
             cpu: 30m

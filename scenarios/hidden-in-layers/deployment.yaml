@@ -9,7 +9,8 @@ spec:
     spec:
       containers:
       - name: hidden-in-layers
-        image: madhuakula/k8s-goat-hidden-in-layers
+        image: hidden-in-layers:latest
+        imagePullPolicy: Never
         # command:
         #  - "bin/sh"
         #  - "-c"

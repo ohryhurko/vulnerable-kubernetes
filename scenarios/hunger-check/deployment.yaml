@@ -69,7 +69,8 @@ spec:
       serviceAccountName: big-monolith-sa
       containers:
       - name: hunger-check
-        image: madhuakula/k8s-goat-hunger-check
+        image: hunger-check:latest
+        imagePullPolicy: Never
         # resources:
         #   limits:
         #     memory: "1000Gi"

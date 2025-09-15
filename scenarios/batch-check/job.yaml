@@ -9,7 +9,8 @@ spec:
     spec:
       containers:
       - name: batch-check
-        image: madhuakula/k8s-goat-batch-check
+        image: batch-check:latest
+        imagePullPolicy: Never
         # command:
         #  - "bin/sh"
         #  - "-c"

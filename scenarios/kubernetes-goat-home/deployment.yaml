@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: kubernetes-goat-home
-        image: madhuakula/k8s-goat-home
+        image: cluster-dashboard:latest
+        imagePullPolicy: Never
         resources:
           limits:
             memory: "50Mi"
