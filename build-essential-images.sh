@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Build Images Script
-# This script builds all Docker images locally for the vulnerable cluster
+# Build Essential Images Script
+# This script builds only the most essential Docker images to save space
 
 set -e
 
-echo "🔨 Building all Docker images for vulnerable cluster"
-echo "=================================================="
+echo "🔨 Building essential Docker images for vulnerable cluster"
+echo "========================================================="
 
 # Check if Docker is running
 if ! docker info > /dev/null 2>&1; then
@@ -19,38 +19,28 @@ echo "🧹 Cleaning up Docker to free space..."
 docker system prune -f
 docker builder prune -f
 
-# Build images for each component
-echo "📦 Building infrastructure images..."
+# Build only essential images
+echo "📦 Building essential infrastructure images..."
 
 cd infrastructure
 
-# List of components to build
-components=(
-    "batch-check"
-    "build-code" 
-    "cache-store"
-    "health-check"
-    "hidden-in-layers"
-    "hunger-check"
-    "info-app"
-    "internal-api"
-    "metadata-db"
-    "poor-registry"
+# Essential components only
+essential_components=(
+    "build-code"
+    "health-check" 
     "system-monitor"
-    "users-repo"
-    "helm-tiller"
-    "goat-home"
+    "kubernetes-goat-home"
 )
 
-# Build each component
-for component in "${components[@]}"; do
+# Build each essential component
+for component in "${essential_components[@]}"; do
     if [ -d "$component" ]; then
         echo "🔨 Building $component..."
         cd "$component"
         
         # Use different image names based on component
         case $component in
-            "goat-home")
+            "kubernetes-goat-home")
                 docker build -t cluster-dashboard:latest .
                 ;;
             *)
@@ -76,13 +66,16 @@ done
 cd ..
 
 echo ""
-echo "🎉 All images built successfully!"
+echo "🎉 Essential images built successfully!"
 echo ""
 echo "📋 Built images:"
-docker images | grep -E "(batch-check|build-code|cache-store|health-check|hidden-in-layers|hunger-check|info-app|internal-api|metadata-db|poor-registry|system-monitor|users-repo|helm-tiller|cluster-dashboard)" | head -20
+docker images | grep -E "(build-code|health-check|system-monitor|cluster-dashboard)" | head -10
 
 echo ""
 echo "🚀 Next steps:"
 echo "1. Deploy the cluster: bash setup-vulnerable-cluster.sh"
 echo "2. Access the cluster: bash access-cluster.sh"
 echo "3. Open dashboard: http://127.0.0.1:1234"
+echo ""
+echo "💡 Note: Only essential services are running. For full functionality,"
+echo "   run 'bash build-images.sh' to build all components."

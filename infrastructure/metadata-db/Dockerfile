@@ -1,15 +1,22 @@
-FROM golang:alpine
-LABEL MAINTAINER="Madhu Akula" INFO="Kubernetes Goat"
+FROM golang:alpine AS builder
+
+WORKDIR /app
+
+COPY go.mod ./
+RUN go mod download
+
+COPY main.go ./
+COPY metadata ./metadata/
+RUN go build -o metadata-db main.go
+
+FROM alpine:latest
+
+RUN apk add --no-cache curl ca-certificates
 
 WORKDIR /
 
-COPY metadata /metadata
-COPY go.mod /go.mod
-COPY main.go /main.go
-
-
-RUN apk add --no-cache curl ca-certificates
-RUN go build -o /
+COPY --from=builder /app/metadata-db /metadata-db
+COPY --from=builder /app/metadata /metadata
 
 EXPOSE 80
 
