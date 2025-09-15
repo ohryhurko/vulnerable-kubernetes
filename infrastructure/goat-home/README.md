@@ -1,15 +1,13 @@
-# Kubernetes Goat Home
+# Cluster Dashboard Service
 
-This docker container is part of Kubernetes Goat.
+A vulnerable application service for security assessment.
 
-## Building this docker container
-
-```bash
-docker build -t madhuakula/k8s-goat-home .
-```
-
-## Push this docker container to Docker Hub
+## Building
 
 ```bash
-docker push madhuakula/k8s-goat-home
+docker build -t cluster-dashboard .
 ```
+
+## Deployment
+
+This service is deployed via Kubernetes manifests in the scenarios directory.

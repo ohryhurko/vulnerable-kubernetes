@@ -1,20 +1,14 @@
-# Helm Tiller
+# Helm Tiller Service
 
-This docker container is part of Kubernetes Goat.
+A vulnerable application service for security assessment.
 
-## Building this docker container
-
-```bash
-docker build -t madhuakula/k8s-goat-helm-tiller .
-```
-
-## Push this docker container to Docker Hub
+## Building
 
 ```bash
-docker push madhuakula/k8s-goat-helm-tiller
+docker build -t helm-tiller .
 ```
 
-### Reference
+## Deployment
 
-* [https://engineering.bitnami.com/articles/helm-security.html](https://engineering.bitnami.com/articles/helm-security.html)
+This service is deployed via Kubernetes manifests in the scenarios directory.
 

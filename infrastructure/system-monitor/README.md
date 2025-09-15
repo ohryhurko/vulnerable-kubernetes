@@ -1,15 +1,13 @@
-# System Monitor
+# System Monitor Service
 
-This docker container is part of Kubernetes Goat.
+A vulnerable application service for security assessment.
 
-## Building this docker container
-
-```bash
-docker build -t madhuakula/k8s-goat-system-monitor .
-```
-
-## Push this docker container to Docker Hub
+## Building
 
 ```bash
-docker push madhuakula/k8s-goat-system-monitor
+docker build -t system-monitor .
 ```
+
+## Deployment
+
+This service is deployed via Kubernetes manifests in the scenarios directory.

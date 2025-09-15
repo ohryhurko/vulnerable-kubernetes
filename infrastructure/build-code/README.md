@@ -1,23 +1,13 @@
-# Build Code
+# Build Code Service
 
-This docker container is part of Kubernetes Goat.
+A vulnerable application service for security assessment.
 
-## Building this docker container
-
-```bash
-docker build -t madhuakula/k8s-goat-build-code .
-```
-
-## Push this docker container to Docker Hub
+## Building
 
 ```bash
-docker push madhuakula/k8s-goat-build-code
+docker build -t build-code .
 ```
 
-## Extra
+## Deployment
 
-* Build the `app` binary for the linux using the following command
-
-```bash
-GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build
-```
+This service is deployed via Kubernetes manifests in the scenarios directory.
